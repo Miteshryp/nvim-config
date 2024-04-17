@@ -455,3 +455,28 @@ maps.n["<leader>uy"] = { ui.toggle_syntax, desc = "Toggle syntax highlighting (b
 maps.n["<leader>uh"] = { ui.toggle_foldcolumn, desc = "Toggle foldcolumn" }
 
 utils.set_mappings(astronvim.user_opts("mappings", maps))
+
+-- Remote SSHFS
+local api = require('remote-sshfs.api')
+vim.keymap.set('n', '<leader>rc', api.connect, {})
+vim.keymap.set('n', '<leader>rd', api.disconnect, {})
+vim.keymap.set('n', '<leader>re', api.edit, {})
+
+-- (optional) Override telescope find_files and live_grep to make dynamic based on if connected to host
+-- local builtin = require("telescope.builtin")
+-- local connections = require("remote-sshfs.connections")
+maps.n["<leader>ff"] = function()
+ if connections.is_connected then
+  api.find_files()
+ else
+  require("telescope.builtin").find_files()
+ end
+end
+
+maps.n["<leader>fg"] = function()
+ if connections.is_connected then
+  api.live_grep()
+ else
+  require("telescope.builtin").live_grep()
+ end
+end
