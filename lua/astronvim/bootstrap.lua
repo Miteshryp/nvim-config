@@ -130,5 +130,5 @@ astronvim.user_terminals = {}
 astronvim.lsp = { skip_setup = astronvim.user_opts("lsp.skip_setup", {}), progress = {} }
 --- the default colorscheme to apply on startup
 -- astronvim.default_colorscheme = astronvim.user_opts("colorscheme", "astrotheme", false)
-astronvim.default_colorscheme = astronvim.user_opts("colorscheme", "gruvbox", true)
-
+-- astronvim.default_colorscheme = astronvim.user_opts("colorscheme", "gruvbox", true)
+astronvim.default_colorscheme = astronvim.user_opts("colorscheme", "nightfly", true)

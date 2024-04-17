@@ -221,6 +221,7 @@ if is_available "alpha-nvim" then
         or not vim.o.modifiable -- don't open if not modifiable
       then
         should_skip = true
+        -- @TODO: Load possesion session here?
       else
         for _, arg in pairs(vim.v.argv) do
           if arg == "-b" or arg == "-c" or vim.startswith(arg, "+") or arg == "-S" then
@@ -251,21 +252,26 @@ if is_available "indent-blankline.nvim" then
   })
 end
 
-if is_available "resession.nvim" then
-  autocmd("VimLeavePre", {
-    desc = "Save session on close",
-    group = augroup("resession_auto_save", { clear = true }),
-    callback = function()
-      local buf_utils = require "astronvim.utils.buffer"
-      local autosave = buf_utils.sessions.autosave
-      if autosave and buf_utils.is_valid_session() then
-        local save = require("resession").save
-        if autosave.last then save("Last Session", { notify = false }) end
-        if autosave.cwd then save(vim.fn.getcwd(), { dir = "dirsession", notify = false }) end
-      end
-    end,
-  })
-end
+-- if is_available "neovim-session-manager" then
+--   autocmd("VimLeavePre", {
+--     desc = "Save session on close",
+--     group = augroup("resession_auto_save", { clear = true }),
+--     callback = function()
+--       local buf_utils = require "astronvim.utils.buffer"
+--       local autosave = buf_utils.sessions.autosave
+--       if autosave and buf_utils.is_valid_session() then
+--         local save = require("resession").save
+--         if autosave.last then save("Last Session", { notify = false }) end
+--         if autosave.cwd then save(vim.fn.getcwd(), { dir = "dirsession", notify = false }) end
+--       end
+--     end,
+--   })
+--   -- autocmd("VimEnter", {
+--   --   desc = "Automatically load the saved session in the directory",
+--   --   group = augroup("resession_auto_load", { clear = true }),
+--   --   callback = function() vim.fn["SessionManager"] "load_current_dir_session" end,
+--   -- })
+-- end
 
 if is_available "neo-tree.nvim" then
   autocmd("BufEnter", {
