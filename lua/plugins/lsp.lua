@@ -20,6 +20,7 @@ return {
     dependencies = {
       {
         "folke/neoconf.nvim",
+        lazy = true,
         opts = function()
           local global_settings, file_found
           local _, depth = vim.fn.stdpath("config"):gsub("/", "")
@@ -54,18 +55,19 @@ return {
     event = "User AstroFile",
     config = require "plugins.configs.lspconfig",
   },
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    dependencies = {
-      {
-        "jay-babu/mason-null-ls.nvim",
-        cmd = { "NullLsInstall", "NullLsUninstall" },
-        opts = { handlers = {} },
-      },
-    },
-    event = "User AstroFile",
-    opts = function() return { on_attach = require("astronvim.utils.lsp").on_attach } end,
-  },
+  -- {
+  --   "jose-elias-alvarez/null-ls.nvim",
+  --   lazy = true,
+  --   dependencies = {
+  --     {
+  --       "jay-babu/mason-null-ls.nvim",
+  --       cmd = { "NullLsInstall", "NullLsUninstall" },
+  --       opts = { handlers = {} },
+  --     },
+  --   },
+  --   event = "User AstroFile",
+  --   opts = function() return { on_attach = require("astronvim.utils.lsp").on_attach } end,
+  -- },
   {
     "stevearc/aerial.nvim",
     event = "User AstroFile",
