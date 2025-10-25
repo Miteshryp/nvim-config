@@ -14,6 +14,17 @@ vim.on_key(function(char)
   end
 end, namespace "auto_hlsearch")
 
+autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    -- Start treesitter manually if not started
+    if not pcall(vim.treesitter.get_parser, 0) then
+      vim.treesitter.start()
+    end
+  end,
+})
+
+
 autocmd("BufReadPre", {
   desc = "Disable certain functionality on very large files",
   group = augroup("large_buf", { clear = true }),

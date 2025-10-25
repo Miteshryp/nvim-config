@@ -39,6 +39,8 @@ return {
           return { global_settings = global_settings and string.rep("../", depth):sub(1, -2) .. global_settings }
         end,
       },
+      "hrsh7th/cmp-nvim-lsp",
+      { "antosha417/nvim-lsp-file-operations", config=true },
       {
         "williamboman/mason-lspconfig.nvim",
         cmd = { "LspInstall", "LspUninstall" },
